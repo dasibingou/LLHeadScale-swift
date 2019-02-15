@@ -32,7 +32,9 @@ class ToolManager: NSObject {
                     //无缓存则下载图片
                     SDWebImageDownloader.shared().downloadImage(with: URL(string: url!), options: [], progress: nil) { (image, data, error, compelte) in
                         //图片模糊
-                        self.handleEffectImage(image)
+                        if image != nil {
+                            self.handleEffectImage(image)
+                        }
                     }
                 }
             }
@@ -40,8 +42,8 @@ class ToolManager: NSObject {
     }
     
     //图片模糊操作
-    func handleEffectImage(_ image:UIImage?) -> Void {
-        effectImg = EffectView.boxblurImage(withBlur: 20, image: image!)
+    func handleEffectImage(_ image:UIImage!) -> Void {
+        effectImg = EffectView.boxblurImage(withBlur: 20, image: image)
         if effectHead != nil {
             effectHead?.image = effectImg
             effectBg?.image = effectImg
@@ -49,7 +51,7 @@ class ToolManager: NSObject {
     }
     
     //图片赋值
-    func loadEffectImage(head:UIImageView?,bg:UIImageView?) -> Void {
+    func loadEffectImage(head:inout UIImageView?,bg:inout UIImageView?) -> Void {
         effectHead = head
         effectBg = bg
         

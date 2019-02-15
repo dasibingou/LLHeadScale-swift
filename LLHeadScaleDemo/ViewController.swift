@@ -64,7 +64,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             self.automaticallyAdjustsScrollViewInsets = false
         }
         
-        loadData()
+        tableView.reloadData()
+        
+        DispatchQueue.main.async {
+            self.loadData()
+        }
     }
     
     //加载xib
@@ -81,7 +85,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         viewHead.loadData(data: data)
         
         //单例图片赋值
-        ToolManager.shareInstance.loadEffectImage(head: viewHead.imgBg, bg: imgHeadBg)
+        ToolManager.shareInstance.loadEffectImage(head: &viewHead.imgBg, bg: &imgHeadBg)
     }
     
 //MARK: UITableViewDelegate
@@ -99,6 +103,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             let height : CGFloat = CGFloat(240 + fabsf(Float(y))*2)
             let rate : CGFloat = height/240.00
             imgHeadBg.transform = .init(scaleX: rate, y: rate)
+            DLog("hidden:\(viewHead.imgBg.isHidden)")
         } else {
             //显示头部背景图片
             if viewHead.imgBg.isHidden == true {

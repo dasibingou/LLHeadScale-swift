@@ -29,7 +29,7 @@ class HeadView: UIView {
         imgHead.layer.masksToBounds = true
         imgHead.layer.cornerRadius = 75.0/2
         
-        imgBg.sd_setImage(with: URL(string: data!["bg"]!), placeholderImage: UIImage(named: "placeholder.png"))
+//        imgBg.sd_setImage(with: URL(string: data!["bg"]!), placeholderImage: UIImage(named: "placeholder.png"))
         imgHead.sd_setImage(with: URL(string: data!["head"]!), placeholderImage: UIImage(named: "placeholder.png"))
     }
     
